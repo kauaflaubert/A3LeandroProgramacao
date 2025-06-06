@@ -1,0 +1,14 @@
+{
+  "name": "locadora-api",
+  "version": "1.0.0",
+  "description": "Sistema de Locadora de Veículos",
+  "main": "src/view/gui/LocadoraGUI.java",
+  "scripts": {
+    "start": "java -cp \"lib/*:target/classes\" view.gui.LocadoraGUI",
+    "start-console": "java -cp \"lib/*:target/classes\" view.Sistema",
+    "compile": "javac -cp \"lib/*\" -d target/classes src/util/*.java src/model/*.java src/view/gui/util/*.java src/view/gui/*.java",
+    "clean": "rm -rf target/",
+    "build": "mkdir -p target/classes && npm run compile",
+    "setup-db": "mysql -u root < src/sql/criar_banco.sql"
+  }
+} 
