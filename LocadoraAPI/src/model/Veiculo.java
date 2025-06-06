@@ -32,7 +32,7 @@ public abstract class Veiculo {
 
     // Métodos de acesso ao banco de dados
     public void salvar() throws SQLException {
-        String sql = "INSERT INTO veiculos (placa, modelo, marca, ano, valor_diaria, disponivel) VALUES (?, ?, ?, ?, ?, ?)";
+        String sql = "INSERT INTO veiculos (placa, modelo, marca, ano, valor_diaria, disponivel, tipo) VALUES (?, ?, ?, ?, ?, ?, ?)";
         
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setString(1, this.placa);
@@ -41,6 +41,7 @@ public abstract class Veiculo {
             stmt.setInt(4, this.ano);
             stmt.setDouble(5, this.valorDiaria);
             stmt.setBoolean(6, this.disponivel);
+            stmt.setString(7, this.getTipo());
             
             stmt.executeUpdate();
             
@@ -68,7 +69,7 @@ public abstract class Veiculo {
     }
 
     public void atualizar() throws SQLException {
-        String sql = "UPDATE veiculos SET modelo = ?, marca = ?, ano = ?, valor_diaria = ?, disponivel = ? WHERE placa = ?";
+        String sql = "UPDATE veiculos SET modelo = ?, marca = ?, ano = ?, valor_diaria = ?, disponivel = ?, tipo = ? WHERE placa = ?";
         
         try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
             stmt.setString(1, this.modelo);
@@ -76,7 +77,8 @@ public abstract class Veiculo {
             stmt.setInt(3, this.ano);
             stmt.setDouble(4, this.valorDiaria);
             stmt.setBoolean(5, this.disponivel);
-            stmt.setString(6, this.placa);
+            stmt.setString(6, this.getTipo());
+            stmt.setString(7, this.placa);
             
             stmt.executeUpdate();
             
@@ -135,7 +137,8 @@ public abstract class Veiculo {
                     "m.cilindradas, m.tipo_partida " +
                     "FROM veiculos v " +
                     "LEFT JOIN carros c ON v.placa = c.placa " +
-                    "LEFT JOIN motos m ON v.placa = m.placa";
+                    "LEFT JOIN motos m ON v.placa = m.placa " +
+                    "ORDER BY v.placa";
         
         try (Statement stmt = conexao.createStatement();
              ResultSet rs = stmt.executeQuery(sql)) {
@@ -148,8 +151,9 @@ public abstract class Veiculo {
                 int ano = rs.getInt("ano");
                 double valorDiaria = rs.getDouble("valor_diaria");
                 boolean disponivel = rs.getBoolean("disponivel");
+                String tipo = rs.getString("tipo");
                 
-                if (rs.getObject("numero_portas") != null) {
+                if (tipo.equals("Carro")) {
                     int numeroPortas = rs.getInt("numero_portas");
                     String tipoCambio = rs.getString("tipo_cambio");
                     boolean arCondicionado = rs.getBoolean("ar_condicionado");
@@ -187,9 +191,10 @@ public abstract class Veiculo {
                 int ano = rs.getInt("ano");
                 double valorDiaria = rs.getDouble("valor_diaria");
                 boolean disponivel = rs.getBoolean("disponivel");
+                String tipo = rs.getString("tipo");
                 
                 Veiculo veiculo;
-                if (rs.getObject("numero_portas") != null) {
+                if (tipo.equals("Carro")) {
                     int numeroPortas = rs.getInt("numero_portas");
                     String tipoCambio = rs.getString("tipo_cambio");
                     boolean arCondicionado = rs.getBoolean("ar_condicionado");
