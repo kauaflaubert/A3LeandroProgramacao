@@ -12,7 +12,7 @@ Este projeto foi desenvolvido como trabalho final da disciplina de Programação
 - Renan Abreu Prazeres > 12725146772@ulife.com.br
 - Andrei Ribeiro Reis dos Santos > 12725172399@ulife.com.br
 - Felipe Sobral Carneiro > 12725161414@ulife.com.br
-- Ryan > example@ulife.com.br
+- Ryan Gabriel Rodrigues Mendes > 12725136275@ulife.com.br
 
 ## Comandos para Execução 🚀
 
