@@ -2,6 +2,18 @@
 
 Este projeto foi desenvolvido como trabalho final da disciplina de Programação Orientada a Objetos, com o objetivo de criar um sistema de gerenciamento para uma locadora de veículos.
 
+### Professor
+- Leandro Cruz
+
+## Equipe de Desenvolvimento 👥
+
+- Kauã Flaubert Lima Gomes > 12725146129@ulife.com.br
+- Caio Neves Passos > 12725120255@ulife.com.br
+- Renan Abreu Prazeres > 12725146772@ulife.com.br
+- Andrei Ribeiro Reis dos Santos > 12725172399@ulife.com.br
+- Felipe Sobral Carneiro > 12725161414@ulife.com.br
+- Ryan > example@ulife.com.br
+
 ## Comandos para Execução 🚀
 
 ```bash
@@ -102,9 +114,21 @@ O sistema utiliza MySQL para persistência dos dados, com:
 - Constraints para integridade dos dados
 - Queries otimizadas
 
-## Equipe de Desenvolvimento 👥
+## Material de Apoio 📚
 
-[Liste aqui os membros da equipe]
+Para o desenvolvimento deste projeto, foram utilizados os seguintes materiais e recursos:
+
+### Roteiros da Disciplina
+- Roteiro 8
+- Roteiro 9
+- Roteiro 10
+
+### Ferramentas de IA
+- ChatGPT - Auxílio em dúvidas e boas práticas de programação
+- Cursor - IDE com recursos de IA para desenvolvimento
+
+### Material do Professor
+- Repositório GitHub do Professor: [AulaBDJAVA](https://github.com/profleandrocruz8/AulaBDJAVA)
 
 ## Requisitos do Sistema 💻
 

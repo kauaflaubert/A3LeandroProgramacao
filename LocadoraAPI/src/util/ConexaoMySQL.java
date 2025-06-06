@@ -8,7 +8,7 @@ public class ConexaoMySQL {
     private static Connection conexao = null;
     private static final String URL = "jdbc:mysql://localhost:3306/locadora";
     private static final String USUARIO = "root";
-    private static final String SENHA = "password1@";
+    private static final String SENHA = "root";
 
     public static Connection getConexao() throws SQLException {
         if (conexao == null) {
