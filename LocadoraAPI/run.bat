@@ -40,7 +40,7 @@ goto menu
 echo.
 echo Compilando o projeto...
 if not exist "target\classes" mkdir target\classes
-javac -d target\classes -cp "lib/*" src/main/java/**/*.java
+javac -d target\classes -cp "lib/*" src\model\*.java src\util\*.java src\view\*.java src\view\gui\*.java src\view\console\*.java
 if errorlevel 1 (
     echo Erro na compilacao!
     pause
