@@ -1,3 +1,7 @@
+-- Este arquivo é um exemplo comum de implementação de banco de dados.
+-- Foi mantido como referência de uma abordagem mais simples.
+-- Para o sistema em produção, use o arquivo locadora.sql que contém a estrutura completa e dados de exemplo.
+
 CREATE DATABASE IF NOT EXISTS locadora;
 USE locadora;
 

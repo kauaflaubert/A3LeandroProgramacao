@@ -7,11 +7,11 @@ Este projeto foi desenvolvido como trabalho final da disciplina de Programação
 
 ## Equipe de Desenvolvimento 👥
 
-- Kauã Flaubert Lima Gomes > 12725146129@ulife.com.br
-- Caio Neves Passos > 12725120255@ulife.com.br
-- Renan Abreu Prazeres > 12725146772@ulife.com.br
 - Andrei Ribeiro Reis dos Santos > 12725172399@ulife.com.br
+- Caio Neves Passos > 12725120255@ulife.com.br
 - Felipe Sobral Carneiro > 12725161414@ulife.com.br
+- Kauã Flaubert Lima Gomes > 12725146129@ulife.com.br
+- Renan Abreu Prazeres > 12725146772@ulife.com.br
 - Ryan Gabriel Rodrigues Mendes > 12725136275@ulife.com.br
 
 ## Requisitos do Sistema 💻
@@ -21,11 +21,42 @@ Este projeto foi desenvolvido como trabalho final da disciplina de Programação
 - Para Linux/macOS: Make (já vem instalado por padrão)
 - Para Windows: Nenhuma instalação adicional necessária
 
+> O projeto pode ser encontrado em: [https://github.com/kauaflaubert/A3LeandroProgramacao]
+
+## Requisitos do Projeto 📋
+
+O sistema foi desenvolvido atendendo aos seguintes requisitos:
+
+1. **Menu de Operações**
+   - Interface gráfica moderna (GUI) e console
+   - Opções de CRUD para veículos e clientes
+   - Navegação intuitiva entre funcionalidades
+
+2. **Operações CRUD**
+   - Create: Cadastro individual de registros
+   - Read: Consulta e listagem de dados
+   - Update: Alteração de registros existentes
+   - Delete: Exclusão de registros
+
+3. **Modelagem de Classes**
+   - Hierarquia de veículos (4+ classes):
+     - `Veiculo` (classe abstrata)
+     - `Carro` (classe concreta)
+     - `Moto` (classe concreta)
+     - `Cliente` (classe concreta)
+     - `Locacao` (classe concreta)
+
+4. **Tecnologias**
+   - Java como linguagem principal
+   - Swing para interface gráfica
+   - MySQL para persistência
+   - Padrões de projeto aplicados
+
 ## Instalação e Configuração 🔧
 
 1. Clone o repositório > git clone (chave SSH)
 2. Configure o banco de dados MySQL
-3. Execute o script de criação do banco (`src/sql/criar_banco.sql`)
+3. Execute o script de criação do banco (`src/sql/locadora.sql`)
 4. Ajuste as credenciais do banco em `src/util/ConexaoMySQL.java`
 5. Execute o sistema usando os comandos listados no início
 
@@ -62,14 +93,41 @@ Este projeto foi desenvolvido como parte da avaliação A3 da disciplina de Prog
 
 ### Funcionalidades Implementadas ✨
 
-1. Cadastro e gerenciamento de veículos (carros e motos)
-2. Cadastro e gerenciamento de clientes
-3. Realização e gerenciamento de locações
-4. Interface gráfica moderna e intuitiva
-5. Integração com banco de dados MySQL
-6. Sistema de busca e filtros
-7. Validações de dados
-8. Cálculo automático de valores
+1. **Cadastro (Create)**
+   - Inclusão individual de veículos
+   - Cadastro de clientes
+   - Registro de locações
+   - Validações em tempo real
+
+2. **Consulta (Read)**
+   - Busca por placa/CPF
+   - Listagem de veículos disponíveis
+   - Histórico de locações
+   - Filtros e ordenação
+
+3. **Atualização (Update)**
+   - Modificação de dados de veículos
+   - Atualização de cadastros
+   - Alteração de locações
+   - Validações de integridade
+
+4. **Exclusão (Delete)**
+   - Remoção de veículos
+   - Exclusão de clientes
+   - Cancelamento de locações
+   - Controle de dependências
+
+5. **Interface**
+   - GUI moderna com Swing
+   - Modo console alternativo
+   - Feedback visual de operações
+   - Mensagens de erro informativas
+
+6. **Persistência**
+   - Banco de dados MySQL
+   - Transações seguras
+   - Backup automático
+   - Integridade referencial
 
 ## Estrutura do Projeto 🏗️
 
@@ -108,43 +166,80 @@ src/
 - `ConexaoMySQL.java` - Gerenciamento de conexão com banco de dados
 
 #### `src/sql/`
-- Scripts SQL para criação e manutenção do banco de dados
+- Scripts de criação e população do banco de dados
 
-## Conceitos de POO Aplicados 📚
+## Exemplos de Código 💻
 
-### Herança 🔄
-- Hierarquia de veículos (Veiculo → Carro/Moto)
-- Reutilização de código e especialização de comportamentos
+### Herança e Polimorfismo
+```java
+// Classe abstrata base
+public abstract class Veiculo {
+    protected String placa;
+    protected double valorDiaria;
+    
+    public abstract String getTipo();
+    public abstract double calcularValorLocacao(int dias);
+}
 
-### Polimorfismo 🔄
-- Tratamento genérico de veículos
-- Comportamentos específicos para cada tipo de veículo
-- Método `calcularValorLocacao()` implementado diferentemente para cada tipo
+// Classe concreta
+public class Carro extends Veiculo {
+    private int numPortas;
+    
+    @Override
+    public String getTipo() {
+        return "Carro";
+    }
+    
+    @Override
+    public double calcularValorLocacao(int dias) {
+        return valorDiaria * dias;
+    }
+}
+```
 
-### Encapsulamento 🔒
-- Atributos privados com getters/setters
-- Proteção de dados e validações
+### Interface Gráfica
+```java
+// Exemplo de tela de cadastro
+public class CadastroVeiculoGUI extends JFrame {
+    private JTextField txtPlaca;
+    private JComboBox<String> cmbTipo;
+    
+    public CadastroVeiculoGUI() {
+        setTitle("Cadastro de Veículo");
+        setSize(400, 300);
+        setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+        // ... configuração dos componentes
+    }
+}
+```
 
-### Interfaces e Classes Abstratas 📋
-- Definição de contratos
-- Garantia de implementação de métodos necessários
+### Operações CRUD
+```java
+// Exemplo de operação de salvar
+public void salvar() {
+    String sql = "INSERT INTO veiculos (placa, tipo, valor_diaria) VALUES (?, ?, ?)";
+    try (PreparedStatement stmt = conexao.prepareStatement(sql)) {
+        stmt.setString(1, placa);
+        stmt.setString(2, getTipo());
+        stmt.setDouble(3, valorDiaria);
+        stmt.executeUpdate();
+    }
+}
+```
 
-## Interface Gráfica 🎨
-
-O sistema possui uma interface gráfica moderna desenvolvida com Swing, apresentando:
-- Design responsivo e intuitivo
-- Paleta de cores profissional
-- Feedback visual para ações do usuário
-- Validações em tempo real
-- Mensagens de erro informativas
-
-## Banco de Dados 💾
-
-O sistema utiliza MySQL para persistência dos dados, com:
-- Tabelas normalizadas
-- Relacionamentos bem definidos
-- Constraints para integridade dos dados
-- Queries otimizadas
+### Conexão com Banco
+```java
+// Exemplo de conexão MySQL
+public class ConexaoMySQL {
+    private static final String URL = "jdbc:mysql://localhost:3306/locadora";
+    private static final String USER = "root";
+    private static final String PASS = "senha";
+    
+    public static Connection getConexao() throws SQLException {
+        return DriverManager.getConnection(URL, USER, PASS);
+    }
+}
+```
 
 ## Material de Apoio 📚
 
