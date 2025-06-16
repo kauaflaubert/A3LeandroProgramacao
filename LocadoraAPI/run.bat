@@ -1,5 +1,5 @@
 @echo off
-setlocal
+setlocal enabledelayedexpansion
 
 :: Definindo cores para melhor visualização
 color 0A
@@ -40,14 +40,51 @@ goto menu
 echo.
 echo Compilando o projeto...
 if not exist "target\classes" mkdir target\classes
-javac -d target\classes -cp "lib/*" src\model\*.java src\util\*.java src\view\*.java src\view\gui\*.java src\view\console\*.java
-if errorlevel 1 (
-    echo Erro na compilacao!
-    pause
-    goto menu
+
+:: Compilando arquivos do diretório model
+echo Compilando arquivos do diretório model...
+javac -d target\classes -cp "lib/*" src\model\Veiculo.java src\model\Carro.java src\model\Cliente.java src\model\Locacao.java src\model\Moto.java
+if errorlevel 1 goto compile_error
+
+:: Compilando arquivos do diretório util
+echo Compilando arquivos do diretório util...
+for %%f in (src\util\*.java) do (
+    echo Compilando: %%f
+    javac -d target\classes -cp "lib/*" "%%f"
+    if errorlevel 1 goto compile_error
 )
+
+:: Compilando arquivos do diretório view
+echo Compilando arquivos do diretório view...
+for %%f in (src\view\*.java) do (
+    echo Compilando: %%f
+    javac -d target\classes -cp "lib/*" "%%f"
+    if errorlevel 1 goto compile_error
+)
+
+:: Compilando arquivos do diretório view/gui
+echo Compilando arquivos do diretório view/gui...
+for %%f in (src\view\gui\*.java) do (
+    echo Compilando: %%f
+    javac -d target\classes -cp "lib/*" "%%f"
+    if errorlevel 1 goto compile_error
+)
+
+:: Compilando arquivos do diretório view/console
+echo Compilando arquivos do diretório view/console...
+for %%f in (src\view\console\*.java) do (
+    echo Compilando: %%f
+    javac -d target\classes -cp "lib/*" "%%f"
+    if errorlevel 1 goto compile_error
+)
+
 echo Compilacao concluida com sucesso!
 timeout /t 2 >nul
+goto menu
+
+:compile_error
+echo Erro na compilacao!
+pause
 goto menu
 
 :clean
