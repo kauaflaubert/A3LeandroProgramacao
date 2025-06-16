@@ -14,15 +14,47 @@ Este projeto foi desenvolvido como trabalho final da disciplina de Programação
 - Felipe Sobral Carneiro > 12725161414@ulife.com.br
 - Ryan Gabriel Rodrigues Mendes > 12725136275@ulife.com.br
 
+## Requisitos do Sistema 💻
+
+- Java JDK 8 ou superior
+- MySQL 5.7 ou superior
+- Para Linux/macOS: Make (já vem instalado por padrão)
+- Para Windows: Nenhuma instalação adicional necessária
+
+## Instalação e Configuração 🔧
+
+1. Clone o repositório > git clone (chave SSH)
+2. Configure o banco de dados MySQL
+3. Execute o script de criação do banco (`src/sql/criar_banco.sql`)
+4. Ajuste as credenciais do banco em `src/util/ConexaoMySQL.java`
+5. Execute o sistema usando os comandos listados no início
+
 ## Comandos para Execução 🚀
 
+### Windows
+Basta executar o arquivo `run.bat` e escolher a opção desejada no menu:
 ```bash
-# Executar a interface gráfica (recomendado)
-npm run clean && npm run build && npm start
-
-# Executar a versão console (alternativa)
-npm run clean && npm run build && npm run start-console
+run.bat
 ```
+
+### macOS/Linux
+Basta executar o arquivo `run.sh` e escolher a opção desejada no menu:
+```bash
+# Primeira vez (para tornar o script executável)
+chmod +x run.sh
+
+# Para executar
+./run.sh
+```
+
+O menu apresentará as seguintes opções:
+1. Executar Interface Gráfica
+2. Executar Versão Console
+3. Limpar Arquivos Compilados
+4. Compilar Projeto
+5. Limpar, Compilar e Executar GUI
+6. Limpar, Compilar e Executar Console
+7. Sair
 
 ## Sobre o Projeto 📋
 
@@ -129,17 +161,3 @@ Para o desenvolvimento deste projeto, foram utilizados os seguintes materiais e 
 
 ### Material do Professor
 - Repositório GitHub do Professor: [AulaBDJAVA](https://github.com/profleandrocruz8/AulaBDJAVA)
-
-## Requisitos do Sistema 💻
-
-- Java JDK 8 ou superior
-- MySQL 5.7 ou superior
-- Node.js (para execução dos scripts)
-
-## Instalação e Configuração 🔧
-
-1. Clone o repositório
-2. Configure o banco de dados MySQL
-3. Execute o script de criação do banco (`src/sql/criar_banco.sql`)
-4. Ajuste as credenciais do banco em `src/util/ConexaoMySQL.java`
-5. Execute o sistema usando os comandos listados no início
